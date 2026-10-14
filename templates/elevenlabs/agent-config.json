@@ -1,0 +1,81 @@
+{
+  "_notes": "Base config for scripts/el.py create-agent. CLI flags override prompt, first_message, voice_id, llm, tts model, language, max duration. Keys starting with _ are stripped before sending.",
+  "conversation_config": {
+    "agent": {
+      "first_message": "",
+      "language": "en",
+      "disable_first_message_interruptions": false,
+      "prompt": {
+        "prompt": "",
+        "llm": "claude-haiku-4-5",
+        "temperature": 0.3,
+        "max_tokens": 200,
+        "timezone": "Europe/London",
+        "backup_llm_config": {
+          "preference": "override",
+          "order": ["gpt-4.1", "gemini-2.5-flash", "gpt-4.1-mini"]
+        },
+        "cascade_timeout_seconds": 8,
+        "built_in_tools": {
+          "end_call": {
+            "type": "system",
+            "name": "end_call",
+            "description": "",
+            "params": { "system_tool_type": "end_call" }
+          },
+          "skip_turn": {
+            "type": "system",
+            "name": "skip_turn",
+            "description": "",
+            "params": { "system_tool_type": "skip_turn" }
+          }
+        },
+        "knowledge_base": [],
+        "rag": {
+          "enabled": false,
+          "embedding_model": "e5_mistral_7b_instruct",
+          "max_vector_distance": 0.4,
+          "max_documents_length": 500,
+          "max_retrieved_rag_chunks_count": 4
+        }
+      }
+    },
+    "tts": {
+      "model_id": "eleven_v4_turbo",
+      "voice_id": "AGYozmgYT0SJVnLKg7iN",
+      "stability": 0.5,
+      "similarity_boost": 0.8,
+      "speed": 1.0,
+      "agent_output_audio_format": "pcm_16000",
+      "text_normalisation_type": "system_prompt"
+    },
+    "asr": {
+      "provider": "scribe_realtime",
+      "quality": "high",
+      "user_input_audio_format": "pcm_16000",
+      "keywords": []
+    },
+    "turn": {
+      "turn_model": "turn_v3",
+      "turn_eagerness": "normal",
+      "turn_timeout": 7,
+      "silence_end_call_timeout": 20,
+      "speculative_turn": true,
+      "spelling_patience": "auto"
+    },
+    "conversation": {
+      "max_duration_seconds": 240
+    }
+  },
+  "platform_settings": {
+    "call_limits": {
+      "agent_concurrency_limit": 1,
+      "daily_limit": 10,
+      "bursting_enabled": false
+    },
+    "privacy": {
+      "record_voice": true,
+      "retention_days": 30
+    }
+  }
+}

@@ -1,0 +1,4 @@
+.env*
+.mcp*
+output-prompts/*
+__pycache__/
